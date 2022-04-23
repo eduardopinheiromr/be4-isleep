@@ -7,4 +7,5 @@ type RootStackParamList = {
   Main: RootNavigationParamList;
   SelectedDayModal: { day: Date; history: any[] };
   NewMissionModal: undefined;
+  AvatarModal: undefined;
 };

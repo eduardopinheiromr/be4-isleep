@@ -1,8 +1,11 @@
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import React, { useEffect, useState } from "react";
-import { Text, View } from "react-native";
+import { Image, Text, View } from "react-native";
+import Avatar from "../components/Avatar";
 import Button from "../components/Button";
+import MissionRow from "../components/MissionRow";
+import { styles } from "../components/shared/styles";
 import { useMissionStore } from "../stores/mission";
 import { getMissions } from "../utils/mission";
 
@@ -21,11 +24,10 @@ export default function MissionRegisterScreen() {
 
   return (
     <View>
-      <Text>Missões diárias registradas</Text>
+      <Avatar />
+      <Text style={styles.centeredText}>Missões diárias registradas</Text>
       {missions.map(mission => (
-        <View key={mission.name}>
-          <Text>{mission.name}</Text>
-        </View>
+        <MissionRow key={mission.name} mission={mission} />
       ))}
       <Button onPress={() => navigation.navigate("NewMissionModal")}>
         Adicionar nova missão

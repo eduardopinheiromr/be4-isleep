@@ -6,6 +6,9 @@ import SelectedDayModal from "../../screens/SelectedDayModal";
 import MissionRegisterScreen from "../../screens/MissionRegisterScreen";
 import { createStackNavigator } from "@react-navigation/stack";
 import NewMissionModal from "../../screens/NewMissionModal";
+import AntIcon from "react-native-vector-icons/AntDesign";
+import MatIcon from "react-native-vector-icons/MaterialCommunityIcons";
+import AvatarModal from "../../screens/AvatarModal";
 
 const { Navigator, Screen } =
   createBottomTabNavigator<RootNavigationParamList>();
@@ -14,8 +17,22 @@ const RootStack = createStackNavigator<RootStackParamList>();
 const BottomNavigation = () => {
   return (
     <Navigator initialRouteName="Calendar">
-      <Screen name="Calendar" component={CalendarScreen} />
-      <Screen name="MissionRegister" component={MissionRegisterScreen} />
+      <Screen
+        name="Calendar"
+        component={CalendarScreen}
+        options={{
+          title: "Calendário",
+          tabBarIcon: props => <AntIcon {...props} name="calendar" />,
+        }}
+      />
+      <Screen
+        name="MissionRegister"
+        component={MissionRegisterScreen}
+        options={{
+          title: "Missões",
+          tabBarIcon: props => <MatIcon {...props} name="podium-gold" />,
+        }}
+      />
     </Navigator>
   );
 };
@@ -34,6 +51,7 @@ export default function Navigation() {
           component={SelectedDayModal}
         />
         <RootStack.Screen name="NewMissionModal" component={NewMissionModal} />
+        <RootStack.Screen name="AvatarModal" component={AvatarModal} />
       </RootStack.Navigator>
     </NavigationContainer>
   );

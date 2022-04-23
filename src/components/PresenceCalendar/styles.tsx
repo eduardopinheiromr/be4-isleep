@@ -8,28 +8,33 @@ export const styles = StyleSheet.create({
   },
   day: {
     width: "14.28%",
-    height: "60px",
+    height: 60,
     borderLeftWidth: 1,
     borderBottomWidth: 1,
     borderColor: "black",
   },
-  month: {
+  monthDisplay: {
     width: "100%",
-    height: "50px",
-    textAlign: "center",
+    height: 50,
     display: "flex",
     justifyContent: "center",
+    alignItems: "center",
+  },
+  monthString: {
     textTransform: "capitalize",
   },
   currentDay: {
+    width: "14.28%",
+    height: 60,
+    borderLeftWidth: 1,
+    borderBottomWidth: 1,
+    borderColor: "black",
     fontWeight: "bold",
-    borderColor: "lightgreen",
     backgroundColor: "lightgreen",
-    height: "100%",
   },
   weekDay: {
     width: "14.28%",
-    height: "60px",
+    height: 60,
     borderLeftWidth: 1,
     borderBottomWidth: 1,
     borderColor: "black",
@@ -37,5 +42,10 @@ export const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     fontSize: 20,
+  },
+  icon: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
   },
 });

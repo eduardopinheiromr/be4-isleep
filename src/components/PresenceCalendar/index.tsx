@@ -1,51 +1,25 @@
-import React, { useState } from "react";
-import { Pressable, Text, View } from "react-native";
+import React, { useEffect, useState } from "react";
 import { getCurrentCalendar } from "../../utils/getCurrentCalendar";
-import { styles } from "./styles";
+import WeekDays from "./WeekDays";
+import MonthDisplay from "./MonthDisplay";
+import AllDays from "./AllDays";
 
 export default function PresenceCalendar() {
-  const { now, calendar, currentMonth, monthString } = getCurrentCalendar();
+  const [calendar, setCalendar] = useState<TCalendar | undefined>(undefined);
 
-  const [selectedDay, setSelectedDay] = useState(now);
+  useEffect(() => {
+    getCurrentCalendar().then(calendar => {
+      setCalendar(calendar);
+    });
+  }, []);
 
-  const handlePressDay = (day: Date) => {
-    setSelectedDay(day);
-    console.log(day);
-  };
+  if (!calendar) return <></>;
 
   return (
     <>
-      <View style={styles.month}>
-        <Text>{monthString}</Text>
-      </View>
-      <View style={styles.weekGrid}>
-        {calendar.slice(0, 7).map((day, index) => (
-          <Text key={index} style={styles.weekDay}>
-            {day.toLocaleString("default", { weekday: "short" })}
-          </Text>
-        ))}
-      </View>
-      <View style={styles.weekGrid}>
-        {calendar.map((day, index) => {
-          return (
-            <Pressable
-              key={index}
-              style={styles.day}
-              onPress={() => handlePressDay(day)}
-            >
-              <Text
-                style={
-                  day.getDate() === selectedDay.getDate()
-                    ? styles.currentDay
-                    : undefined
-                }
-              >
-                {day.toLocaleDateString().split("/")[0]}
-              </Text>
-            </Pressable>
-          );
-        })}
-      </View>
+      <MonthDisplay calendar={calendar} />
+      <WeekDays calendar={calendar} />
+      <AllDays calendar={calendar} />
     </>
   );
 }

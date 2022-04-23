@@ -1,10 +1,26 @@
+import { getLocalValue, setLocalValue } from "./asyncStorageManager";
 import { getDaysInMonthUTC } from "./calendar";
+import { formatMonthName } from "./dateFormatters";
 
-export const getCurrentCalendar = () => {
+export const getCurrentCalendar = async (): Promise<TCalendar> => {
   const now = new Date();
-  const currentMonth = now.toLocaleString("pt-BR", { month: "long" });
-  const monthString = now.toLocaleString("pt-BR", { month: "long" });
+  const month = formatMonthName(now);
+  const year = now.getFullYear();
+
+  const localCalendar = await getLocalValue(`calendar-${year}-${month}`);
+
+  if (localCalendar) {
+    return localCalendar;
+  }
+
   const calendar = getDaysInMonthUTC(now.getMonth(), now.getFullYear());
 
-  return { now, currentMonth, monthString, calendar };
+  const currentCalendar = {
+    year,
+    month,
+    days: calendar.map(day => ({ day, history: [] })),
+  };
+
+  await setLocalValue(`calendar-${year}-${month}`, currentCalendar);
+  return currentCalendar;
 };

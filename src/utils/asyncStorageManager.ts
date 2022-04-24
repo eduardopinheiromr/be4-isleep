@@ -2,6 +2,8 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export const getLocalValue = async (field: string) => {
   const localValues = await AsyncStorage.getItem(field);
+
+  console.log({ localValues });
   return localValues ? JSON.parse(localValues) : "";
 };
 

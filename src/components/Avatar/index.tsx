@@ -13,10 +13,8 @@ export default function Avatar() {
   const [avatar, setAvatar] = useState("avatar(1).jpg");
 
   useEffect(() => {
-    if (user.avatar) {
-      setAvatar(user.avatar);
-    }
-  }, [user.avatar]);
+    if (user?.avatar) setAvatar(user.avatar);
+  }, [user?.avatar]);
 
   return (
     <View

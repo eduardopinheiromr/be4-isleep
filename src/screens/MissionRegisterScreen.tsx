@@ -8,6 +8,8 @@ import MissionRow from "../components/MissionRow";
 import { styles } from "../components/shared/styles";
 import { useMissionStore } from "../stores/mission";
 import { getMissions } from "../utils/mission";
+import { useUserStore } from "../stores/user";
+import { getLocalValue } from "../utils/asyncStorageManager";
 
 type ModalScreenProp = StackNavigationProp<
   RootStackParamList,
@@ -16,6 +18,14 @@ type ModalScreenProp = StackNavigationProp<
 
 export default function MissionRegisterScreen() {
   const { missions, setMissions } = useMissionStore();
+  const { user, setUser } = useUserStore();
+
+  useEffect(() => {
+    if (!user) {
+      getLocalValue("user").then(user => setUser(user));
+    }
+  }, [user]);
+
   const navigation = useNavigation<ModalScreenProp>();
 
   useEffect(() => {
@@ -23,7 +33,7 @@ export default function MissionRegisterScreen() {
   }, []);
 
   return (
-    <View>
+    <View style={styles.container}>
       <Avatar />
       <Text style={styles.centeredText}>Missões diárias registradas</Text>
       {missions.map(mission => (

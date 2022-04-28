@@ -40,7 +40,7 @@ export default function AllDays({ calendar }: Props) {
           >
             <Text>{formatDay(day)}</Text>
             <View style={styles.icon}>
-              {history.length === 0 ? (
+              {!history.missions || history.missions?.length === 0 ? (
                 <Icon name="pluscircleo" size={30} />
               ) : (
                 <Icon name="checkcircleo" />

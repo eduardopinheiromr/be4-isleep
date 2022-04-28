@@ -15,7 +15,13 @@ export const getCurrentCalendar = async (): Promise<TCalendar> => {
   const currentCalendar = {
     year,
     month,
-    days: calendar.map(day => ({ day, history: [] })),
+    days: calendar.map(day => ({
+      day,
+      history: {
+        missions: [],
+        about: "",
+      },
+    })),
   };
 
   await setLocalValue(`calendar-${year}-${month}`, currentCalendar);

@@ -1,7 +1,6 @@
 import { RouteProp, useNavigation, useRoute } from "@react-navigation/native";
 import React from "react";
 import { Button, Text, View } from "react-native";
-import Checkbox from "../components/Checkbox";
 import DailyMission from "../components/DailyMission";
 import { styles } from "../components/shared/styles";
 import { useMissionStore } from "../stores/mission";
@@ -22,15 +21,20 @@ export default function SelectedDayModal() {
     <View style={styles.container}>
       <Text style={{ fontSize: 30 }}>Dia {selectedDay}</Text>
       <Text>
-        {history.length === 0
+        {history?.missions?.length === 0
           ? `Você ainda não registrou nada para ${
               isToday ? "hoje" : `o dia ${selectedDay}`
             }`
           : ""}
       </Text>
-      {missions.map(mission => (
-        <DailyMission key={mission.name} mission={mission} />
-      ))}
+      {missions &&
+        missions.map(mission => (
+          <DailyMission
+            key={mission.name}
+            day={{ day, history }}
+            mission={mission}
+          />
+        ))}
       <Button onPress={() => navigation.goBack()} title="Voltar" />
     </View>
   );

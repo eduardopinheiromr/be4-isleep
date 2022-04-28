@@ -17,20 +17,9 @@ type ModalScreenProp = StackNavigationProp<
 >;
 
 export default function MissionRegisterScreen() {
-  const { missions, setMissions } = useMissionStore();
-  const { user, setUser } = useUserStore();
-
-  useEffect(() => {
-    if (!user) {
-      getLocalValue("user").then(user => setUser(user));
-    }
-  }, [user]);
+  const { missions } = useMissionStore();
 
   const navigation = useNavigation<ModalScreenProp>();
-
-  useEffect(() => {
-    getMissions().then(missions => setMissions(missions));
-  }, []);
 
   return (
     <View style={styles.container}>

@@ -3,15 +3,10 @@ import { getCurrentCalendar } from "../../utils/getCurrentCalendar";
 import WeekDays from "./WeekDays";
 import MonthDisplay from "./MonthDisplay";
 import AllDays from "./AllDays";
+import { useCalendarStore } from "../../stores/calendar";
 
 export default function PresenceCalendar() {
-  const [calendar, setCalendar] = useState<TCalendar | undefined>(undefined);
-
-  useEffect(() => {
-    getCurrentCalendar().then(calendar => {
-      setCalendar(calendar);
-    });
-  }, []);
+  const { calendar } = useCalendarStore();
 
   if (!calendar) return <></>;
 

@@ -6,5 +6,10 @@ type TCalendar = {
 
 type TDay = {
   day: Date;
-  history: any[];
+  history: THistory;
+};
+
+type THistory = {
+  missions: TMission[];
+  about: string;
 };
